@@ -88,7 +88,7 @@ include("developer.php");
           <div class="activity">
                 <div class="title">
                     <i class="uil uil-clock-three"></i>
-                    <span class="text">Complaints</span>
+                    <span class="text">Pending Complaints</span>
                 </div>
 
                 <div class="activity-data">
@@ -121,11 +121,6 @@ include("developer.php");
                                         <span >STATUS</span>
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="data st">
-                                        <span >Expert Assigned</span>
-                                    </div>
-                                </td>
                             </tr>
                         </thead>
                         <tbody>
@@ -139,8 +134,21 @@ include("developer.php");
                             <td><?php echo $data['Department']??''; ?></td>
                             <td><?php echo $data['Location']??''; ?></td>
                             <td><?php echo convertToRelativeTime($data['Timestart']); ?></td>
-                            <td><?php echo $data['Status']??''; ?></td>
-                            <td><?php echo $data['Expert_assigned']??''; ?></td>
+                            <td>
+                                <form action="developer.php" method="post">
+                                <input type="text" style="display: none;" id="issue" name="issue" value=<?php echo $data['ComplaintId']; ?>>
+                                    <label for="expert">Assign Expert:</label>
+                                    <select id="expert" name="expert">
+                                        <option value="">Select an expert</option>
+                                        <?php foreach ($experts as $expert): ?>
+                                        <option value = <?php echo $expert['Name']; ?>>
+                                            <?php echo $expert['Name']; ?>
+                                        </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <input type="submit" value="Assign" >
+                                </form>
+                            </td>
                             </tr>
                             <?php
                             $sn++;}}else{ ?>
@@ -150,7 +158,8 @@ include("developer.php");
                             </td>
                             <tr>
                             <?php
-                            }?>
+                            }
+                            ?>
                             </tbody>
                     </table>
                 </div>

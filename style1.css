@@ -30,3 +30,6 @@ tbody td {
     padding-left: 13px;
 }
 
+input {
+    visibility: none;
+}
