@@ -30,7 +30,7 @@ include("developer.php");
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
-                <li><a href="#">
+                <li><a href="complaints.php">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Complaints</span>
                 </a></li>
@@ -38,7 +38,7 @@ include("developer.php");
                             <i class="uil uil-files-landscapes"></i>
                             <span class="link-name">solved complaints</span>
                         </a></li>
-                <li><a href="pending_comp.php">
+                <li><a href="#">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Pending Complaints</span>
                 </a></li>
@@ -130,9 +130,9 @@ include("developer.php");
                         </thead>
                         <tbody>
                         <?php
-                            if(is_array($fetchAll)){      
+                            if(is_array($fetchPending)){      
                             $sn=1;
-                            foreach($fetchAll as $data){
+                            foreach($fetchPending as $data){
                             ?>
                             <tr >
                             <td><?php echo $data['ComplaintId']??''; ?></td>
@@ -146,7 +146,7 @@ include("developer.php");
                             $sn++;}}else{ ?>
                             <tr>
                                 <td colspan="8">
-                            <?php echo $fetchAll; ?>
+                            <?php echo $fetchPending; ?>
                             </td>
                             <tr>
                             <?php

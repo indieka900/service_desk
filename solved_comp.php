@@ -30,15 +30,15 @@ include("developer.php");
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
-                <li><a href="#">
+                <li><a href="complaints.php">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Complaints</span>
                 </a></li>
-                <li><a href="solved_comp.php">
-                            <i class="uil uil-files-landscapes"></i>
-                            <span class="link-name">solved complaints</span>
-                        </a></li>
-                <li><a href="pending_comp.php">
+				<li><a href="#">
+                    <i class="uil uil-files-landscapes"></i>
+                    <span class="link-name">solved complaints</span>
+                </a></li>
+				  <li><a href="pending_comp.php">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Pending Complaints</span>
                 </a></li>
@@ -85,10 +85,50 @@ include("developer.php");
         </div>
 
         <div class="dash-content">
-          <div class="activity">
+            <!-- <div class="overview">
+                <div class="title">
+                    <i class="uil uil-tachometer-fast-alt"></i>
+                    <span class="text">Dashboard</span>
+                </div>
+
+                <div class="boxes">
+                    <div class="box box1">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="text">TOTAL COMPLAINTS</span>
+                        <span class="number">
+                            <?php 
+                                $number = $totalRows;
+                                echo $number;
+                            ?>
+                        </span>
+                    </div>
+                    <div class="box box2">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="text">SOLVED COMPLAINTS</span>
+                        <span class="number">
+                        <?php 
+                                $number = $complete;
+                                echo $number;
+                            ?>
+                        </span>
+                    </div>
+                    <div class="box box3">
+                        <i class="uil uil-files-landscapes"></i>
+                        <span class="text">PENDING COMPLAINTS</span>
+                        <span class="number">
+                        <?php 
+                                $number = $pending;
+                                echo $number;
+                            ?>
+                        </span>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="activity">
                 <div class="title">
                     <i class="uil uil-clock-three"></i>
-                    <span class="text">Complaints</span>
+                    <span class="text">Solved Complaints</span>
                 </div>
 
                 <div class="activity-data">
@@ -130,9 +170,9 @@ include("developer.php");
                         </thead>
                         <tbody>
                         <?php
-                            if(is_array($fetchAll)){      
+                            if(is_array($fetchSolved)){      
                             $sn=1;
-                            foreach($fetchAll as $data){
+                            foreach($fetchSolved as $data){
                             ?>
                             <tr >
                             <td><?php echo $data['ComplaintId']??''; ?></td>
@@ -146,7 +186,7 @@ include("developer.php");
                             $sn++;}}else{ ?>
                             <tr>
                                 <td colspan="8">
-                            <?php echo $fetchAll; ?>
+                            <?php echo $fetchSolved; ?>
                             </td>
                             <tr>
                             <?php

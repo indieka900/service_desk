@@ -4,13 +4,16 @@ include("database2.php");
 $db= $conn;
 $tableName="complaints";
 $columns= ['ComplaintId', 'Location','Department','Description','Timestart','Status','Expert_assigned'];
-$fetchData = fetch_data($db, $tableName, $columns);
+$fetchData = fetch_recent_comp($db, $tableName, $columns);
+$fetchSolved = fetch_solved_comp($db, $tableName, $columns);
+$fetchPending = fetch_pending_comp($db, $tableName, $columns);
+$fetchAll = fetch_all_comp($db, $tableName, $columns);
 $totalRows = fetc_total_rows($db, $tableName);
 $pending = fetc_pending_rows($db, $tableName);
 $complete = fetc_complete_rows($db, $tableName);
 
-//Fetch the all complaints from database
-function fetch_data($db, $tableName, $columns){
+//Fetch the recent complaints from database
+function fetch_recent_comp($db, $tableName, $columns){
    if(empty($db)){
    $msg= "Database connection error";
    }elseif (empty($columns) || !is_array($columns)) {
@@ -21,6 +24,89 @@ function fetch_data($db, $tableName, $columns){
 
    $columnName = implode(", ", $columns);
    $query = "SELECT ".$columnName." FROM $tableName"." ORDER BY Timestart DESC"." LIMIT 3";
+   $result = $db->query($query);
+
+   if($result== true){ 
+   if ($result->num_rows > 0) {
+      $row= mysqli_fetch_all($result, MYSQLI_ASSOC);
+      $msg= $row;
+   } else {
+      $msg= "No Data Found"; 
+   }
+   }else{
+   $msg= mysqli_error($db);
+   }
+   }
+   return $msg;
+}
+
+
+//Fetch the solved complaints from database
+function fetch_solved_comp($db, $tableName, $columns){
+   if(empty($db)){
+   $msg= "Database connection error";
+   }elseif (empty($columns) || !is_array($columns)) {
+   $msg="columns Name must be defined in an indexed array";
+   }elseif(empty($tableName)){
+   $msg= "Table Name is empty";
+   }else{
+
+   $columnName = implode(", ", $columns);
+   $query = "SELECT ".$columnName." FROM $tableName"." WHERE Status = 'Complete'"." ORDER BY Timestart DESC";
+   $result = $db->query($query);
+
+   if($result== true){ 
+   if ($result->num_rows > 0) {
+      $row= mysqli_fetch_all($result, MYSQLI_ASSOC);
+      $msg= $row;
+   } else {
+      $msg= "No Data Found"; 
+   }
+   }else{
+   $msg= mysqli_error($db);
+   }
+   }
+   return $msg;
+}
+//Fetch the pending complaints from database
+function fetch_pending_comp($db, $tableName, $columns){
+   if(empty($db)){
+   $msg= "Database connection error";
+   }elseif (empty($columns) || !is_array($columns)) {
+   $msg="columns Name must be defined in an indexed array";
+   }elseif(empty($tableName)){
+   $msg= "Table Name is empty";
+   }else{
+
+   $columnName = implode(", ", $columns);
+   $query = "SELECT ".$columnName." FROM $tableName"." WHERE Status = 'Pending'"." ORDER BY Timestart DESC"." LIMIT 3";
+   $result = $db->query($query);
+
+   if($result== true){ 
+   if ($result->num_rows > 0) {
+      $row= mysqli_fetch_all($result, MYSQLI_ASSOC);
+      $msg= $row;
+   } else {
+      $msg= "No Data Found"; 
+   }
+   }else{
+   $msg= mysqli_error($db);
+   }
+   }
+   return $msg;
+}
+//Fetch the all complaints from database
+function fetch_all_comp($db, $tableName, $columns){
+   if(empty($db)){
+   $msg= "Database connection error";
+   }elseif (empty($columns) || !is_array($columns)) {
+   $msg="columns Name must be defined in an indexed array";
+   }elseif(empty($tableName)){
+   $msg= "Table Name is empty";
+   }else{
+
+   $columnName = implode(", ", $columns);
+   $query = "SELECT ".$columnName." FROM $tableName"." ORDER BY Timestart DESC";
    $result = $db->query($query);
 
    if($result== true){ 

@@ -30,15 +30,15 @@ include("developer.php");
                     <i class="uil uil-estate"></i>
                     <span class="link-name">Dashboard</span>
                 </a></li>
-                <li><a href="complaint.php">
+                <li><a href="complaints.php">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Complaints</span>
                 </a></li>
-				<li><a href="#">
+				<li><a href="solved_comp.php">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">solved complaints</span>
                 </a></li>
-				  <li><a href="#">
+				  <li><a href="pending_comp.php">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name">Pending Complaints</span>
                 </a></li>

@@ -313,6 +313,9 @@ nav.close ~ .dashboard .top{
     background-color: var(--box1-color);
     transition: var(--tran-05);
 }
+.box:hover {
+	box-shadow: 3px 6px 5px #002500;
+}
 .boxes .box i{
     font-size: 35px;
     color: var(--text-color);
