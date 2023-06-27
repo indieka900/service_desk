@@ -513,6 +513,20 @@ input {
     right: -20px;
     padding: 3px 8px;
     border-radius: 50%;
-    background-color: red;
+    background-color: #d61b1b;
+  }
+
+  button {
+    padding: 0px 20px;
+  }
+
+  .uil-check{
+    font-size: 20px;
+  }
+
+  option {
+    background-color: var(--box3-color);
+    color: var(--text-color);
+    padding: 5px 10px;
   }
   

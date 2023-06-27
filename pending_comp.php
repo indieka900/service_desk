@@ -12,7 +12,7 @@ include("developer.php");
      
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-    <title>ICT OFFICER</title> 
+    <title>SERVICE DESK</title> 
 </head>
 <body>
     <nav>
@@ -21,7 +21,7 @@ include("developer.php");
                 <img src="images/logo.png" alt="">
             </div>
 
-            <span class="logo_name">ICT OFFICER</span>
+            <span class="logo_name">SERVICE DESK</span>
         </div>
 
         <div class="menu-items">
@@ -142,7 +142,7 @@ include("developer.php");
                             $sn=1;
                             foreach($fetchPending as $data){
                             ?>
-                            <tr >
+                            <tr class="clickable-row" data-description="<?php echo $data['Description'] ?? ''; ?>">
                             <td><?php echo $data['ComplaintId']??''; ?></td>
                             <td><?php echo $data['Department']??''; ?></td>
                             <td><?php echo $data['Location']??''; ?></td>
@@ -150,7 +150,6 @@ include("developer.php");
                             <td>
                                 <form action="developer.php" method="post">
                                 <input type="text" style="display: none;" id="issue" name="issue" value=<?php echo $data['ComplaintId']; ?>>
-                                    <label for="expert">Assign Expert:</label>
                                     <select id="expert" name="expert">
                                         <option value="">Select an expert</option>
                                         <?php foreach ($experts as $expert): ?>
@@ -159,7 +158,7 @@ include("developer.php");
                                         </option>
                                         <?php endforeach; ?>
                                     </select>
-                                    <input type="submit" value="Assign" >
+                                    <button type="submit">Assign</button>
                                 </form>
                             </td>
                             </tr>
@@ -237,26 +236,18 @@ include("developer.php");
                             $sn=1;
                             foreach($fetchAssigned as $data){
                             ?>
-                            <tr >
+                            <tr class="clickable-row" data-description="<?php echo $data['Description'] ?? ''; ?>">
                             <td><?php echo $data['ComplaintId']??''; ?></td>
                             <td><?php echo $data['Department']??''; ?></td>
                             <td><?php echo $data['Location']??''; ?></td>
                             <td><?php echo convertToRelativeTime($data['Timestart']); ?></td>
                             <td><?php echo $data['Expert_assigned']??''; ?></td>
                             <td>
-                                <form action="developer.php" method="post">
-                                <!-- <input type="text" style="display: none;" id="issue" name="issue" value=<?php echo $data['ComplaintId']; ?>>
-                                    <label for="expert">Assign Expert:</label>
-                                     <select id="expert" name="expert">
-                                        <option value="">Select an expert</option>
-                                        <?php foreach ($experts as $expert): ?>
-                                        <option value = <?php echo $expert['Name']; ?>>
-                                            <?php echo $expert['Name']; ?>
-                                        </option>
-                                        <?php endforeach; ?>
-                                    </select> 
-                                    <input type="submit" value="Assign" >
-                                </form> -->
+                            <form method="post" action="update_comp.php">
+                                <input type="hidden" id="form2" name="form2" value=<?php echo $data['ComplaintId']; ?>>
+                                <!-- form 2 fields go here -->
+                                <button type="submit"><i class='uil uil-check'></i> Mark Done</button>
+                            </form>
                             </td>
                             </tr>
                             <?php
@@ -271,20 +262,49 @@ include("developer.php");
                             ?>
                             </tbody>
                     </table>
+                    
                 </div>
+                <div class="modal" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="descriptionModalLabel">Description</h5>
+                                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    </button> -->
+                                </div>
+                                <div class="modal-body">
+                                    <p id="descriptionContent"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
+        
     </section>
     <?php
-    // pending_comp.php
-
-    if (isset($_GET['error'])) {
-        $error = $_GET['error'];
-        // Display the error message
-        echo "<script>alert('$error');</script>";
-    }
+        if (isset($_GET['error'])) {
+            $error = $_GET['error'];
+            // Display the error message
+            echo "<script>alert('$error');</script>";
+        }
     ?>
+    <script>
+    // Add event listener to the clickable rows
+    const clickableRows = document.querySelectorAll('.clickable-row');
+    clickableRows.forEach(row => {
+        row.addEventListener('click', function() {
+            // Retrieve the description from the data attribute
+            const description = this.getAttribute('data-description');
 
+            // Set the description content in the modal
+            document.getElementById('descriptionContent').textContent = description;
+
+            // Open the modal
+            $('#descriptionModal').modal('show');
+        });
+    });
+</script>
 
     <script src="script.js"></script>
 </body>

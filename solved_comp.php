@@ -12,7 +12,7 @@ include("developer.php");
      
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-    <title>ICT OFFICER</title> 
+    <title>SERVICE DESK</title> 
 </head>
 <body>
     <nav>
@@ -21,7 +21,7 @@ include("developer.php");
                 <img src="images/logo.png" alt="">
             </div>
 
-            <span class="logo_name">ICT OFFICER</span>
+            <span class="logo_name">SERVICE DESK</span>
         </div>
 
         <div class="menu-items">
@@ -85,46 +85,6 @@ include("developer.php");
         </div>
 
         <div class="dash-content">
-            <!-- <div class="overview">
-                <div class="title">
-                    <i class="uil uil-tachometer-fast-alt"></i>
-                    <span class="text">Dashboard</span>
-                </div>
-
-                <div class="boxes">
-                    <div class="box box1">
-                        <i class="uil uil-files-landscapes"></i>
-                        <span class="text">TOTAL COMPLAINTS</span>
-                        <span class="number">
-                            <?php 
-                                $number = $totalRows;
-                                echo $number;
-                            ?>
-                        </span>
-                    </div>
-                    <div class="box box2">
-                        <i class="uil uil-files-landscapes"></i>
-                        <span class="text">SOLVED COMPLAINTS</span>
-                        <span class="number">
-                        <?php 
-                                $number = $complete;
-                                echo $number;
-                            ?>
-                        </span>
-                    </div>
-                    <div class="box box3">
-                        <i class="uil uil-files-landscapes"></i>
-                        <span class="text">PENDING COMPLAINTS</span>
-                        <span class="number">
-                        <?php 
-                                $number = $pending;
-                                echo $number;
-                            ?>
-                        </span>
-                    </div>
-                </div>
-            </div> -->
-
             <div class="activity">
                 <div class="title">
                     <i class="uil uil-clock-three"></i>

@@ -12,7 +12,7 @@ include("developer.php");
      
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-    <title>ICT OFFICER</title> 
+    <title>SERVICE DESK</title> 
 </head>
 <body>
     <nav>
@@ -21,7 +21,7 @@ include("developer.php");
                 <img src="images/logo.png" alt="">
             </div>
 
-            <span class="logo_name">ICT OFFICER</span>
+            <span class="logo_name">SERVICE DESK</span>
         </div>
 
         <div class="menu-items">

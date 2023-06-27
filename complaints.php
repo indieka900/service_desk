@@ -12,7 +12,7 @@ include("developer.php");
      
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-    <title>ICT OFFICER</title> 
+    <title>SERVICE DESK</title> 
     <style>
     .asc::after {
         content: " ▲";
@@ -30,7 +30,7 @@ include("developer.php");
                 <img src="images/logo.png" alt="">
             </div>
 
-            <span class="logo_name">ICT OFFICER</span>
+            <span class="logo_name">SERVICE DESK</span>
         </div>
 
         <div class="menu-items">
@@ -115,12 +115,12 @@ include("developer.php");
                                         <span >DEPARTMENT</span>
                                     </div>
                                 </td>
-                                <td onclick="sortTable(2)">
+                                <td onclick="sortTable(3)">
                                     <div class="data st">
                                         <span >LOCATION</span>
                                     </div>
                                 </td>
-                                <td onclick="sortTable(5)">
+                                <td onclick="sortTable(2)">
                                     <div class="data st">
                                         <span >DURATION</span>
                                     </div>
@@ -130,7 +130,7 @@ include("developer.php");
                                         <span >STATUS</span>
                                     </div>
                                 </td>
-                                <td onclick="sortTable(3)">
+                                <td onclick="sortTable(5)">
                                     <div class="data st">
                                         <span >Expert Assigned</span>
                                     </div>
@@ -166,18 +166,9 @@ include("developer.php");
             </div>
         </div>
     </section>
-    <?php
-    // pending_comp.php
-
-    if (isset($_GET['error'])) {
-        $error = $_GET['error'];
-        // Display the error message
-        echo "<script>alert('$error');</script>";
-    }
-    ?>
 
     <script>
-function sortTable(n) {
+    function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("myTable");
     switching = true;
