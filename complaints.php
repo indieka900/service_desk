@@ -13,6 +13,15 @@ include("developer.php");
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
     <title>ICT OFFICER</title> 
+    <style>
+    .asc::after {
+        content: " ▲";
+    }
+
+    .desc::after {
+        content: " ▼";
+    }
+</style>
 </head>
 <body>
     <nav>
@@ -92,36 +101,36 @@ include("developer.php");
                 </div>
 
                 <div class="activity-data">
-                    <table>
+                    <table id="myTable">
                         <thead>
                             <tr>
-                                <td>
+                                <td onclick="sortTable(0)">
                                     <div class="data st">
                                         <span >COMPLAINT ID</span>
                                     </div>
                                     
                                 </td>
-                                <td>
+                                <td onclick="sortTable(1)">
                                     <div class="data st">
                                         <span >DEPARTMENT</span>
                                     </div>
                                 </td>
-                                <td>
+                                <td onclick="sortTable(2)">
                                     <div class="data st">
                                         <span >LOCATION</span>
                                     </div>
                                 </td>
-                                <td>
+                                <td onclick="sortTable(5)">
                                     <div class="data st">
                                         <span >DURATION</span>
                                     </div>
                                 </td>
-                                <td>
+                                <td onclick="sortTable(4)">
                                     <div class="data st">
                                         <span >STATUS</span>
                                     </div>
                                 </td>
-                                <td>
+                                <td onclick="sortTable(3)">
                                     <div class="data st">
                                         <span >Expert Assigned</span>
                                     </div>
@@ -157,6 +166,67 @@ include("developer.php");
             </div>
         </div>
     </section>
+    <?php
+    // pending_comp.php
+
+    if (isset($_GET['error'])) {
+        $error = $_GET['error'];
+        // Display the error message
+        echo "<script>alert('$error');</script>";
+    }
+    ?>
+
+    <script>
+function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("myTable");
+    switching = true;
+    // Set the sorting direction to ascending
+    dir = "asc";
+    while (switching) {
+        switching = false;
+        rows = table.getElementsByTagName("TR");
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            if (dir == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+    
+    // Update the table headers to show sorting order
+    var headers = table.getElementsByTagName("TH");
+    for (var i = 0; i < headers.length; i++) {
+        headers[i].innerHTML = headers[i].innerHTML.replace(" ▲", "").replace(" ▼", "");
+        headers[i].classList.remove("asc", "desc");
+    }
+    headers[n].classList.add(dir);
+    headers[n].innerHTML += (dir === "asc") ? " ▲" : " ▼";
+}
+</script>
+
+
+
 
     <script src="script.js"></script>
 </body>

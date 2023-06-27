@@ -97,8 +97,12 @@ include("developer.php");
                         <span class="text">TOTAL COMPLAINTS</span>
                         <span class="number">
                             <?php 
-                                $number = $totalRows;
-                                echo $number;
+                                if(is_array($fetchAll)) {
+                                    $number = count($fetchAll);
+                                    echo $number;
+                                  } else {
+                                    echo 0;
+                                  }
                             ?>
                         </span>
                     </div>
@@ -107,8 +111,12 @@ include("developer.php");
                         <span class="text">SOLVED COMPLAINTS</span>
                         <span class="number">
                         <?php 
-                                $number = $complete;
-                                echo $number;
+                                if(is_array($fetchSolved)) {
+                                    $number = count($fetchSolved);
+                                    echo $number;
+                                  } else {
+                                    echo 0;
+                                  }
                             ?>
                         </span>
                     </div>
@@ -117,8 +125,12 @@ include("developer.php");
                         <span class="text">PENDING COMPLAINTS</span>
                         <span class="number">
                         <?php 
-                                $number = $pending;
-                                echo $number;
+                                if(is_array($fetchPending)) {
+                                    $number = count($fetchPending);
+                                    echo $number;
+                                  } else {
+                                    echo 0;
+                                  }
                             ?>
                         </span>
                     </div>

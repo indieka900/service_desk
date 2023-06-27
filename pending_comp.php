@@ -89,6 +89,19 @@ include("developer.php");
                 <div class="title">
                     <i class="uil uil-clock-three"></i>
                     <span class="text">Pending Complaints</span>
+                    <a href="#" class="notification">
+                    <span class="badge">
+                        <?php 
+                            if(is_array($fetchPending)) {
+                                $number = count($fetchPending);
+                                echo $number;
+                                } else {
+                                echo 0;
+                                }
+                        ?>
+                    </span>
+                    </a>
+
                 </div>
 
                 <div class="activity-data">
@@ -163,9 +176,115 @@ include("developer.php");
                             </tbody>
                     </table>
                 </div>
+                <div class="title">
+                    <i class="uil uil-clock-three"></i>
+                    <span class="text">Assigned Complaints</span>
+                    <a href="#" class="notification">
+                    <span class="badge">
+                        <?php 
+                            if(is_array($fetchAssigned)) {
+                                $number = count($fetchAssigned);
+                                echo $number;
+                                } else {
+                                echo 0;
+                                }
+                        ?>
+                    </span>
+                    </a>
+                </div>
+
+                <div class="activity-data">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>
+                                    <div class="data st">
+                                        <span >COMPLAINT ID</span>
+                                    </div>
+                                    
+                                </td>
+                                <td>
+                                    <div class="data st">
+                                        <span >DEPARTMENT</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="data st">
+                                        <span >LOCATION</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="data st">
+                                        <span >DURATION</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="data st">
+                                        <span >Expert Assigned</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="data st">
+                                        <span >Mark Done</span>
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                            if(is_array($fetchAssigned)){      
+                            $sn=1;
+                            foreach($fetchAssigned as $data){
+                            ?>
+                            <tr >
+                            <td><?php echo $data['ComplaintId']??''; ?></td>
+                            <td><?php echo $data['Department']??''; ?></td>
+                            <td><?php echo $data['Location']??''; ?></td>
+                            <td><?php echo convertToRelativeTime($data['Timestart']); ?></td>
+                            <td><?php echo $data['Expert_assigned']??''; ?></td>
+                            <td>
+                                <form action="developer.php" method="post">
+                                <!-- <input type="text" style="display: none;" id="issue" name="issue" value=<?php echo $data['ComplaintId']; ?>>
+                                    <label for="expert">Assign Expert:</label>
+                                     <select id="expert" name="expert">
+                                        <option value="">Select an expert</option>
+                                        <?php foreach ($experts as $expert): ?>
+                                        <option value = <?php echo $expert['Name']; ?>>
+                                            <?php echo $expert['Name']; ?>
+                                        </option>
+                                        <?php endforeach; ?>
+                                    </select> 
+                                    <input type="submit" value="Assign" >
+                                </form> -->
+                            </td>
+                            </tr>
+                            <?php
+                            $sn++;}}else{ ?>
+                            <tr>
+                                <td colspan="8">
+                            <?php echo $fetchAssigned; ?>
+                            </td>
+                            <tr>
+                            <?php
+                            }
+                            ?>
+                            </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
+    <?php
+    // pending_comp.php
+
+    if (isset($_GET['error'])) {
+        $error = $_GET['error'];
+        // Display the error message
+        echo "<script>alert('$error');</script>";
+    }
+    ?>
+
 
     <script src="script.js"></script>
 </body>
