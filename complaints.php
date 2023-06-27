@@ -143,7 +143,7 @@ include("developer.php");
                             $sn=1;
                             foreach($fetchAll as $data){
                             ?>
-                            <tr >
+                            <tr class="clickable-row" data-description="<?php echo $data['Description'] ?? ''; ?>">
                             <td><?php echo $data['ComplaintId']??''; ?></td>
                             <td><?php echo $data['Department']??''; ?></td>
                             <td><?php echo $data['Location']??''; ?></td>
@@ -164,8 +164,39 @@ include("developer.php");
                     </table>
                 </div>
             </div>
+            <div class="modal" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="descriptionModalLabel">Description of the complaint</h5>
+                            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            </button> -->
+                        </div>
+                        <div class="modal-body">
+                            <p id="descriptionContent"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+
+    <script>
+    // Add event listener to the clickable rows
+    const clickableRows = document.querySelectorAll('.clickable-row');
+    clickableRows.forEach(row => {
+        row.addEventListener('click', function() {
+            // Retrieve the description from the data attribute
+            const description = this.getAttribute('data-description');
+
+            // Set the description content in the modal
+            document.getElementById('descriptionContent').textContent = description;
+
+            // Open the modal
+            $('#descriptionModal').modal('show');
+        });
+    });
+</script>
 
     <script>
     function sortTable(n) {
